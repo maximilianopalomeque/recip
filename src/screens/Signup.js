@@ -7,6 +7,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +23,16 @@ const Signup = () => {
   } = useForm();
 
   // manage post data to server
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:5000/users/signup", {
+        ...data,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   return (
     <Container sx={{ backgroundColor: "white", paddingBottom: "70vh" }}>
@@ -86,6 +96,10 @@ const Signup = () => {
               <TextField
                 {...register("password", {
                   required: "Please enter a password",
+                  minLength: {
+                    value: 5,
+                    message: "Password must be at least 5 characters long",
+                  },
                   maxLength: {
                     value: 10,
                     message: "Password must have a maximun of 10 characters",

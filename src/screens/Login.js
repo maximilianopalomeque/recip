@@ -7,6 +7,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +23,16 @@ const Login = () => {
   } = useForm();
 
   // manage post data to server
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:5000/users/login", {
+        ...data,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   return (
     <Container sx={{ backgroundColor: "white", paddingBottom: "70vh" }}>
