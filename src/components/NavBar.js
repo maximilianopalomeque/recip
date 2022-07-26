@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../utils/Context";
 
 const NavBar = () => {
-  const { auth } = useContext(AuthContext);
+  const { loggedIn, username } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -71,7 +71,7 @@ const NavBar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              {!auth ? (
+              {!loggedIn ? (
                 <div>
                   <MenuItem onClick={handleClose}>
                     <ListItemIcon>
@@ -98,13 +98,13 @@ const NavBar = () => {
                 </div>
               ) : null}
 
-              {auth ? (
+              {loggedIn ? (
                 <div>
                   <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <AccountCircleIcon fontSize="small" />
                     </ListItemIcon>
-                    UserName
+                    {username}
                   </MenuItem>
                   <Divider />
                   <MenuItem onClick={handleClose}>

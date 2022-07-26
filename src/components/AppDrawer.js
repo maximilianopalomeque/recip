@@ -22,7 +22,7 @@ import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import { AuthContext } from "../utils/Context";
 
 const AppDrawer = () => {
-  const { auth } = useContext(AuthContext);
+  const { loggedIn } = useContext(AuthContext);
   const [state, setState] = useState(false);
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -80,7 +80,7 @@ const AppDrawer = () => {
         </ListItem>
       </List>
 
-      {auth && (
+      {loggedIn && (
         <>
           <Container>
             <Grid container>

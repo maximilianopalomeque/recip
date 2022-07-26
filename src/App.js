@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Categories from "./screens/Categories";
 import Category from "./screens/Category";
@@ -16,8 +16,67 @@ import theme from "./utils/theme";
 import { AuthContext } from "./utils/Context";
 
 const App = () => {
-  const [auth, setAuth] = useState(false);
-  const value = { auth, setAuth };
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUserName] = useState();
+  const [token, setToken] = useState();
+  const value = {
+    loggedIn,
+    setLoggedIn,
+    username,
+    setUserName,
+    token,
+    setToken,
+  };
+
+  const checkToken = () => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      return false;
+    }
+
+    const { token, tokenExpirationDate } = userData;
+    const actualDate = new Date();
+    const expirationValue = new Date(tokenExpirationDate); // conver to date obj
+    if (token && expirationValue > actualDate) {
+      return true;
+    }
+    return false;
+  };
+
+  const login = () => {
+    const { token, username, tokenExpirationDate } = JSON.parse(
+      localStorage.getItem("userData")
+    ); // if token is valid, then user data exists (can be destructured)
+    setLoggedIn(true);
+    setUserName(username);
+    setToken(token);
+  };
+
+  const logout = () => {
+    setLoggedIn(false);
+    setUserName(null);
+    setToken(null);
+    localStorage.removeItem("userData");
+  };
+
+  const setAutoLogout = () => {
+    const { tokenExpirationDate } = JSON.parse(
+      localStorage.getItem("userData")
+    );
+
+    const remainingTime = new Date(tokenExpirationDate) - new Date();
+    setTimeout(logout, remainingTime);
+  };
+
+  useEffect(() => {
+    const isTokenValid = checkToken();
+    if (isTokenValid) {
+      login();
+      setAutoLogout();
+    } else {
+      logout();
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={value}>
