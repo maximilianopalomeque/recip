@@ -55,7 +55,7 @@ const Login = () => {
       setLoggedIn(true);
       setUserName(response.data.username);
       setToken(response.data.token);
-      // setRedirect(true);
+      setRedirect(true);
     } catch (error) {
       setError(true);
       console.log(error.response.data);
