@@ -22,7 +22,7 @@ import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import { AuthContext } from "../utils/Context";
 
 const AppDrawer = () => {
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, username } = useContext(AuthContext);
   const [state, setState] = useState(false);
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -96,7 +96,12 @@ const AppDrawer = () => {
                 <ListItemIcon>
                   <RestaurantMenuIcon />
                 </ListItemIcon>
-                <ListItemText primary="My Recipes" />
+                <Link
+                  to={`/${username}/recipes`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <ListItemText primary="My Recipes" />
+                </Link>
               </ListItemButton>
             </ListItem>
           </List>

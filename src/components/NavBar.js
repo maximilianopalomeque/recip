@@ -23,7 +23,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../utils/Context";
 
 const NavBar = () => {
-  const { loggedIn, username } = useContext(AuthContext);
+  const { loggedIn, username, setLoggedIn, setToken, setUserName } =
+    useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -32,6 +33,13 @@ const NavBar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logout = () => {
+    setLoggedIn(false);
+    setUserName(null);
+    setToken(null);
+    localStorage.removeItem("userData");
   };
 
   return (
@@ -104,16 +112,31 @@ const NavBar = () => {
                     <ListItemIcon>
                       <AccountCircleIcon fontSize="small" />
                     </ListItemIcon>
-                    {username}
+                    <Link
+                      to={`/account/${username}`}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      {username}
+                    </Link>
                   </MenuItem>
                   <Divider />
                   <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <PersonIcon fontSize="small" />
                     </ListItemIcon>
-                    My account
+                    <Link
+                      to={`/account/${username}`}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      My account
+                    </Link>
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      logout();
+                    }}
+                  >
                     <ListItemIcon>
                       <LogoutIcon fontSize="small" />
                     </ListItemIcon>

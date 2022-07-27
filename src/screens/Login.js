@@ -18,8 +18,7 @@ const Login = () => {
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState();
 
-  const { loggedIn, setLoggedIn, username, setUserName, token, setToken } =
-    useContext(AuthContext);
+  const { setLoggedIn, setUserName, setToken } = useContext(AuthContext);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);

@@ -8,6 +8,8 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
+import UserRecipes from "./screens/UserRecipes";
+import UserAccount from "./screens/UserAccount";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material/";
@@ -44,9 +46,7 @@ const App = () => {
   };
 
   const login = () => {
-    const { token, username, tokenExpirationDate } = JSON.parse(
-      localStorage.getItem("userData")
-    ); // if token is valid, then user data exists (can be destructured)
+    const { token, username } = JSON.parse(localStorage.getItem("userData")); // if token is valid, then user data exists (can be destructured)
     setLoggedIn(true);
     setUserName(username);
     setToken(token);
@@ -130,6 +130,26 @@ const App = () => {
                 <>
                   <NavBar />
                   <Signup />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/:username/recipes"
+              element={
+                <>
+                  <NavBar />
+                  <UserRecipes />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/account/:username"
+              element={
+                <>
+                  <NavBar />
+                  <UserAccount />
                   <Footer />
                 </>
               }

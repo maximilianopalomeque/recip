@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { Navigate } from "react-router-dom";
 
 import { Container, Grid, TextField, Typography, Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -9,8 +11,14 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
+import { AuthContext } from "../utils/Context";
+
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [error, setError] = useState();
+
+  const { setLoggedIn, setUserName, setToken } = useContext(AuthContext);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -28,8 +36,24 @@ const Signup = () => {
       const response = await axios.post("http://localhost:5000/users/signup", {
         ...data,
       });
-      console.log(response.data);
+      const tokenExpirationDate = new Date(
+        new Date().getTime() + 1000 * 60 * 60
+      );
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          username: response.data.username,
+          email: response.data.email,
+          token: response.data.token,
+          tokenExpirationDate,
+        })
+      );
+      setLoggedIn(true);
+      setUserName(response.data.username);
+      setToken(response.data.token);
+      setRedirect(true);
     } catch (error) {
+      setError(true);
       console.log(error.response.data);
     }
   };
@@ -136,6 +160,16 @@ const Signup = () => {
             </Grid>
           </Grid>
         </form>
+
+        {error && (
+          <Grid item xs={12} mt={2} textAlign="center">
+            <Typography variant="h7" fontWeight={400}>
+              Sign up Failed
+            </Typography>
+          </Grid>
+        )}
+
+        {redirect && <Navigate to="/categories" replace={true} />}
       </Grid>
     </Container>
   );
