@@ -6,11 +6,13 @@ import Button from "@mui/material/Button";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import { Navigate } from "react-router-dom";
+
 import { AuthContext } from "../utils/Context";
 import { Link } from "react-router-dom";
 
 const UserAccount = () => {
-  const { username } = useContext(AuthContext);
+  const { loggedIn, username } = useContext(AuthContext);
 
   return (
     <Container sx={{ backgroundColor: "white", paddingBottom: "60vh" }}>
@@ -54,6 +56,7 @@ const UserAccount = () => {
           </Grid>
         </Grid>
       </Grid>
+      {!loggedIn && <Navigate to="/categories" />}
     </Container>
   );
 };
