@@ -103,9 +103,13 @@ const Login = () => {
               <TextField
                 {...register("password", {
                   required: "Please enter a password",
+                  minLength: {
+                    value: 5,
+                    message: "Password must be at least 5 characters long",
+                  },
                   maxLength: {
-                    value: 10,
-                    message: "Password must have a maximun of 10 characters",
+                    value: 15,
+                    message: "Password must have a maximun of 15 characters",
                   },
                 })}
                 fullWidth
