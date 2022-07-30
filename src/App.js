@@ -20,12 +20,15 @@ import { AuthContext } from "./utils/Context";
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [token, setToken] = useState();
   const value = {
     loggedIn,
     setLoggedIn,
     username,
     setUserName,
+    email,
+    setEmail,
     token,
     setToken,
   };
@@ -46,15 +49,19 @@ const App = () => {
   };
 
   const login = () => {
-    const { token, username } = JSON.parse(localStorage.getItem("userData")); // if token is valid, then user data exists (can be destructured)
+    const { token, username, email } = JSON.parse(
+      localStorage.getItem("userData")
+    ); // if token is valid, then user data exists (can be destructured)
     setLoggedIn(true);
     setUserName(username);
+    setEmail(email);
     setToken(token);
   };
 
   const logout = () => {
     setLoggedIn(false);
     setUserName(null);
+    setEmail(null);
     setToken(null);
     localStorage.removeItem("userData");
   };

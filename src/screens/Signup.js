@@ -17,8 +17,10 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 
-  const { setLoggedIn, setUserName, setToken } = useContext(AuthContext);
+  const { setLoggedIn, setUserName, setToken, setEmail } =
+    useContext(AuthContext);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -36,6 +38,7 @@ const Signup = () => {
       const response = await axios.post("http://localhost:5000/users/signup", {
         ...data,
       });
+
       const tokenExpirationDate = new Date(
         new Date().getTime() + 1000 * 60 * 60
       );
@@ -50,10 +53,14 @@ const Signup = () => {
       );
       setLoggedIn(true);
       setUserName(response.data.username);
+      setEmail(response.data.email);
       setToken(response.data.token);
       setRedirect(true);
     } catch (error) {
       setError(true);
+      if (error.response.data.error === "username already used") {
+        setErrorMessage("User name already used");
+      }
       console.log(error.response.data);
     }
   };
@@ -164,8 +171,15 @@ const Signup = () => {
         {error && (
           <Grid item xs={12} mt={2} textAlign="center">
             <Typography variant="h7" fontWeight={400}>
-              Sign up Failed
+              Sign up failed
             </Typography>
+            {errorMessage && (
+              <Grid item xs={12} textAlign="center">
+                <Typography variant="h7" fontWeight={400}>
+                  {errorMessage}
+                </Typography>
+              </Grid>
+            )}
           </Grid>
         )}
 

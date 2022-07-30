@@ -18,7 +18,8 @@ const Login = () => {
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState();
 
-  const { setLoggedIn, setUserName, setToken } = useContext(AuthContext);
+  const { setLoggedIn, setUserName, setToken, setEmail } =
+    useContext(AuthContext);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -46,6 +47,7 @@ const Login = () => {
         JSON.stringify({
           username: response.data.username,
           email: response.data.email,
+          recipes: response.data.recipes,
           token: response.data.token,
           tokenExpirationDate,
         })
@@ -53,6 +55,7 @@ const Login = () => {
 
       setLoggedIn(true);
       setUserName(response.data.username);
+      setEmail(response.data.email);
       setToken(response.data.token);
       setRedirect(true);
     } catch (error) {

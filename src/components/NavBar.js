@@ -114,7 +114,11 @@ const NavBar = () => {
                     </ListItemIcon>
                     <Link
                       to={`/account/${username}`}
-                      style={{ textDecoration: "none", color: "inherit" }}
+                      style={{
+                        textDecoration: "none",
+                        color: "inherit",
+                        textTransform: "capitalize",
+                      }}
                     >
                       {username}
                     </Link>
