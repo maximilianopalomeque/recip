@@ -3,8 +3,7 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Box from "@mui/material/Box";
 
 import { Navigate } from "react-router-dom";
 
@@ -12,6 +11,8 @@ import { AuthContext } from "../utils/Context";
 import { Link } from "react-router-dom";
 
 import DeleteUserConfirm from "../components/DeleteUserConfirm";
+
+import userimage from "../img/profile-user.png";
 
 const UserAccount = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -29,7 +30,17 @@ const UserAccount = () => {
         <Grid container mt={4}>
           <Grid item container align="center">
             <Grid item xs={12}>
-              <AccountCircleIcon />
+              <Box
+                component="img"
+                sx={{
+                  height: 233,
+                  width: 350,
+                  maxHeight: { xs: 100, md: 100 },
+                  maxWidth: { xs: 100, md: 100 },
+                }}
+                alt="user account image"
+                src={userimage}
+              />
             </Grid>
 
             <Grid item container justifyContent="center">

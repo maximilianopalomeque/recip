@@ -10,12 +10,15 @@ import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import UserRecipes from "./screens/UserRecipes";
 import UserAccount from "./screens/UserAccount";
+import HomeScreen from "./screens/HomeScreen";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material/";
 import theme from "./utils/theme";
 
 import { AuthContext } from "./utils/Context";
+
+import ScrollToTop from "./utils/ScrollToTop";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -90,78 +93,88 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <Routes>
-            <Route
-              path="/categories"
-              element={
-                <>
-                  <NavBar />
-                  <Categories />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/category/:categoryName"
-              element={
-                <>
-                  <NavBar />
-                  <Category />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/recipe/:recipeName"
-              element={
-                <>
-                  <NavBar />
-                  <Recipe />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <>
-                  <NavBar />
-                  <Login />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <>
-                  <NavBar />
-                  <Signup />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/:username/recipes"
-              element={
-                <>
-                  <NavBar />
-                  <UserRecipes />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/account/:username"
-              element={
-                <>
-                  <NavBar />
-                  <UserAccount />
-                  <Footer />
-                </>
-              }
-            />
-          </Routes>
+          <ScrollToTop>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <HomeScreen />
+                  </>
+                }
+              />
+              <Route
+                path="/categories"
+                element={
+                  <>
+                    <NavBar />
+                    <Categories />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/category/:categoryName"
+                element={
+                  <>
+                    <NavBar />
+                    <Category />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/recipe/:recipeName"
+                element={
+                  <>
+                    <NavBar />
+                    <Recipe />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <>
+                    <NavBar />
+                    <Login />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <>
+                    <NavBar />
+                    <Signup />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/:username/recipes"
+                element={
+                  <>
+                    <NavBar />
+                    <UserRecipes />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/account/:username"
+                element={
+                  <>
+                    <NavBar />
+                    <UserAccount />
+                    <Footer />
+                  </>
+                }
+              />
+            </Routes>
+          </ScrollToTop>
         </BrowserRouter>
       </ThemeProvider>
     </AuthContext.Provider>
