@@ -11,8 +11,11 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../utils/Context";
 import { Link } from "react-router-dom";
 
+import DeleteUserConfirm from "../components/DeleteUserConfirm";
+
 const UserAccount = () => {
-  const { loggedIn, username } = useContext(AuthContext);
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const { username } = useContext(AuthContext);
 
   return (
     <Container sx={{ backgroundColor: "white", paddingBottom: "60vh" }}>
@@ -51,12 +54,12 @@ const UserAccount = () => {
               </Button>
             </Grid>
             <Grid item container justifyContent="center" mt={2}>
-              <Button variant="outlined">Delete account</Button>
+              <DeleteUserConfirm />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      {!loggedIn && <Navigate to="/categories" />}
+      {!userData && <Navigate to="/categories" />}
     </Container>
   );
 };

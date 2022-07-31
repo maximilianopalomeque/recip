@@ -5,15 +5,13 @@ import { Container, Grid, Typography } from "@mui/material";
 
 import RecipeCard from "../components/Recipe/RecipeCard";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../utils/Context";
 
 const UserRecipes = () => {
-  const { loggedIn } = useContext(AuthContext);
-
+  const userData = JSON.parse(localStorage.getItem("userData"));
   const [userRecipes, setUserRecipes] = useState();
 
   const getUserRecipes = async () => {
-    const { username, token } = JSON.parse(localStorage.getItem("userData"));
+    const { username, token } = userData;
 
     try {
       const response = await axios(
@@ -28,7 +26,7 @@ const UserRecipes = () => {
   };
 
   useEffect(() => {
-    if (loggedIn) {
+    if (userData) {
       getUserRecipes();
     }
   }, []);
@@ -53,7 +51,7 @@ const UserRecipes = () => {
         </Grid>
       ) : null}
 
-      {!loggedIn && <Navigate to="/categories" />}
+      {!userData && <Navigate to="/categories" />}
     </Container>
   );
 };
