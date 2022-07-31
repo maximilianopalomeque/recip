@@ -75,7 +75,12 @@ const AppDrawer = () => {
             <ListItemIcon>
               <RestaurantIcon />
             </ListItemIcon>
-            <ListItemText primary="All recipes" />
+            <Link
+              to="/recipes/all"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <ListItemText primary="All recipes" />
+            </Link>
           </ListItemButton>
         </ListItem>
       </List>

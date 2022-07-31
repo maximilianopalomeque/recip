@@ -11,6 +11,7 @@ import Signup from "./screens/Signup";
 import UserRecipes from "./screens/UserRecipes";
 import UserAccount from "./screens/UserAccount";
 import HomeScreen from "./screens/HomeScreen";
+import AllRecipes from "./screens/AllRecipes";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material/";
@@ -100,6 +101,16 @@ const App = () => {
                 element={
                   <>
                     <HomeScreen />
+                  </>
+                }
+              />
+              <Route
+                path="/recipes/all"
+                element={
+                  <>
+                    <NavBar />
+                    <AllRecipes />
+                    <Footer />
                   </>
                 }
               />

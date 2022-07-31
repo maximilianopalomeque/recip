@@ -32,7 +32,7 @@ const UserRecipes = () => {
   }, []);
 
   return (
-    <Container sx={{ backgroundColor: "white", paddingBottom: "70vh" }}>
+    <Container sx={{ backgroundColor: "white", paddingBottom: "80vh" }}>
       <Grid container>
         <Grid item xs={12} textAlign="center" mt={5}>
           <Typography variant="h4" fontWeight={500}>
