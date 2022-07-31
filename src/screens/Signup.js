@@ -47,6 +47,7 @@ const Signup = () => {
         JSON.stringify({
           username: response.data.username,
           email: response.data.email,
+          recipes: [],
           token: response.data.token,
           tokenExpirationDate,
         })
