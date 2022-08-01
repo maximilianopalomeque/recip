@@ -13,7 +13,9 @@ const Categories = () => {
 
   const getCategoriesData = async () => {
     try {
-      const response = await axios("http://localhost:5000/categories");
+      const response = await axios(
+        `${process.env.REACT_APP_BACKEND_URL}/categories`
+      );
       setCategoriesData(response.data.categories);
       setIsLoading(false);
     } catch (error) {

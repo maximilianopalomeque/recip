@@ -18,7 +18,7 @@ const Category = () => {
   const getCategoryAndRecipesData = async () => {
     try {
       const response = await axios(
-        `http://localhost:5000/categories/${categoryName}`
+        `${process.env.REACT_APP_BACKEND_URL}/categories/${categoryName}`
       );
       setCategoryPageData(response.data);
       setIsLoading(false);

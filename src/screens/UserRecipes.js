@@ -15,8 +15,10 @@ const UserRecipes = () => {
 
     try {
       const response = await axios(
-        `http://localhost:5000/recipes/user/${username}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/user/${username}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       setUserRecipes(response.data.recipes);

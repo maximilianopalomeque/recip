@@ -18,7 +18,7 @@ const Recipe = () => {
   const getRecipeData = async () => {
     try {
       const response = await axios(
-        `http://localhost:5000/recipes/${recipeName}`
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/${recipeName}`
       );
       setRecipeData(response.data.recipe);
       setIsLoading(false);

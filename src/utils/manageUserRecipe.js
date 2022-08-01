@@ -7,7 +7,7 @@ export const saveRecipe = async (recipeId) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/recipes/recipe/save",
+      `${process.env.REACT_APP_BACKEND_URL}/recipes/recipe/save`,
       {
         username,
         recipeId,
@@ -29,7 +29,7 @@ export const deleteRecipe = async (recipeId) => {
 
   try {
     const response = await axios.delete(
-      "http://localhost:5000/recipes/recipe/delete",
+      `${process.env.REACT_APP_BACKEND_URL}/recipes/recipe/delete`,
       {
         headers: { Authorization: `Bearer ${token}` },
         data: { username, recipeId },

@@ -35,9 +35,12 @@ const Signup = () => {
   // manage post data to server
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/users/signup", {
-        ...data,
-      });
+      const response = await axios.post(
+        process.env.REACT_APP_BACKEND_URL_SIGNUP,
+        {
+          ...data,
+        }
+      );
 
       const tokenExpirationDate = new Date(
         new Date().getTime() + 1000 * 60 * 60

@@ -35,9 +35,12 @@ const Login = () => {
     setError(false);
 
     try {
-      const response = await axios.post("http://localhost:5000/users/login", {
-        ...data,
-      });
+      const response = await axios.post(
+        process.env.REACT_APP_BACKEND_URL_LOGIN,
+        {
+          ...data,
+        }
+      );
 
       const tokenExpirationDate = new Date(
         new Date().getTime() + 1000 * 60 * 60

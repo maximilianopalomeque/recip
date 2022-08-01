@@ -52,7 +52,7 @@ const DeleteUserConfirm = () => {
     const { email, token } = JSON.parse(localStorage.getItem("userData"));
     try {
       const response = await axios.delete(
-        "http://localhost:5000/users/delete",
+        process.env.REACT_APP_BACKEND_URL_DELETE,
         {
           headers: { Authorization: `Bearer ${token}` },
           data: { email, password },

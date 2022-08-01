@@ -12,7 +12,9 @@ const AllRecipes = () => {
 
   const getCategoriesData = async () => {
     try {
-      const response = await axios("http://localhost:5000/recipes/all");
+      const response = await axios(
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/all`
+      );
       setRecipes(response.data.recipes);
       setIsLoading(false);
     } catch (error) {
